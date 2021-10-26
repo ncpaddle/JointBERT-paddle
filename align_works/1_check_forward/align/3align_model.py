@@ -1,45 +1,28 @@
+
 import argparse
-
-from trainer import Trainer
-from utils import init_logger, load_tokenizer, read_prediction_text, set_seed, MODEL_CLASSES, MODEL_PATH_MAP
-from data_loader import load_and_cache_examples
-
-
-def main(args):
-    init_logger()
-    set_seed(args)
-    tokenizer = load_tokenizer(args)
-
-    train_dataset = load_and_cache_examples(args, tokenizer, mode="train")
-    dev_dataset = load_and_cache_examples(args, tokenizer, mode="dev")
-    test_dataset = load_and_cache_examples(args, tokenizer, mode="test")
-
-    trainer = Trainer(args, train_dataset, dev_dataset, test_dataset)
-
-    if args.do_train:
-        trainer.train()
-
-    if args.do_eval:
-        trainer.load_model()
-        trainer.evaluate("test")
-
-    if args.do_align:
-        trainer.align()
+import random
+from reprod_log import ReprodLogger, ReprodDiffHelper
+from finetuning_paddle.model.modeling_jointbert import  JointBERT as PaddleJointBERT
+from finetuning_torch.model.modeling_jointbert import JointBERT as TorchJointBERT
+import numpy as np
+import torch
+import pickle
+import paddle
+import random
+from reprod_log import ReprodLogger, ReprodDiffHelper
 
 
 def getArgs():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--task", default='atis', type=str, help="The name of the task to train")
+    parser.add_argument("--task", default='data_atis', type=str, help="The name of the task to train")
     parser.add_argument("--model_dir", default='snips_model', type=str,
                         help="Path to save, load model")
-    parser.add_argument("--do_align", action="store_true")
     parser.add_argument("--data_dir", default="../../data", type=str, help="The input data dir")
     parser.add_argument("--intent_label_file", default="intent_label.txt", type=str, help="Intent Label file")
     parser.add_argument("--slot_label_file", default="slot_label.txt", type=str, help="Slot Label file")
 
-    parser.add_argument("--model_type", default="bert", type=str,
-                        help="Model type selected in the list: " + ", ".join(MODEL_CLASSES.keys()))
+    parser.add_argument("--model_type", default="bert", type=str,)
 
     parser.add_argument('--seed', type=int, default=1234, help="random seed for initialization")
     parser.add_argument("--train_batch_size", default=32, type=int, help="Batch size for training.")
@@ -75,15 +58,79 @@ def getArgs():
     parser.add_argument("--use_crf", action="store_true", help="Whether to use CRF")
     parser.add_argument("--slot_pad_label", default="PAD", type=str,
                         help="Pad token for slot label pad (to be ignore when calculate loss)")
-    parser.add_argument("--model_name_or_path", default="../atis_params", type=str, help="")
+    parser.add_argument("--model_name_or_path", default="../../atis_params", type=str, help="")
     args = parser.parse_args()
-
-    if args.model_name_or_path == "":
-        args.model_name_or_path = MODEL_PATH_MAP[args.model_type]
 
     return args
 
 
-if __name__ == '__main__':
-    args = getArgs()
-    main(args)
+args = getArgs()
+
+
+# 输入fake_data，得到预测时的数据    在pytorch源代码中生成
+inputs = pickle.load(open('../../fake_data.bin', 'rb'))
+
+# 生成paddle和torch的输入
+paddle_inputs = {k: paddle.to_tensor(v) for (k, v) in inputs.items()}
+torch_inputs = {k: torch.tensor(v) for (k, v) in inputs.items()}
+
+intent_labels =[
+    label.strip() for label in open(
+        '../../data_atis/intent_label.txt', 'r', encoding='utf-8')]
+slot_labels = [
+    label.strip() for label in open(
+        '../../data_atis/slot_label.txt', 'r', encoding='utf-8')]
+
+
+# 加载paddle和torch的模型，得到evaluate的输出
+#TODO 改模型代码，在outputs=self.bert()之后接着return，以得到预训练模型的输出
+model_paddle = PaddleJointBERT.from_pretrained(args.model_name_or_path,
+                                               args=args,
+                                               intent_label_lst=intent_labels,
+                                               slot_label_lst=slot_labels)
+model_paddle.eval()
+out_paddle = model_paddle(**paddle_inputs)[1]
+print(len(out_paddle))
+
+
+model_torch = TorchJointBERT.from_pretrained(args.model_name_or_path,
+                                             args=args,
+                                             intent_label_lst=intent_labels,
+                                             slot_label_lst=slot_labels)
+model_torch.eval()
+out_torch = model_torch(**torch_inputs)[1]
+print(len(out_torch))
+
+
+# 加载ReprodLogger
+rl_torch = ReprodLogger()
+rl_paddle = ReprodLogger()
+rl_torch.add('sequence_output', out_torch[0].detach().numpy())
+rl_paddle.add('sequence_output', out_paddle[0].numpy())
+rl_torch.add('pooled_output', out_torch[1].detach().numpy())
+rl_paddle.add('pooled_output', out_paddle[1].numpy())
+rl_torch.save('../log_reprod/model_output_torch.npy')
+rl_paddle.save('../log_reprod/model_output_paddle.npy')
+
+
+
+
+diff = ReprodDiffHelper()
+info_torch = diff.load_info('../log_reprod/model_output_torch.npy')
+info_paddle = diff.load_info('../log_reprod/model_output_paddle.npy')
+diff.compare_info(info1=info_torch, info2=info_paddle)
+diff.report(diff_method='mean', diff_threshold=1e-5, path='../log_diff/model_diff.txt')
+
+
+
+
+
+
+
+
+
+
+
+
+
+

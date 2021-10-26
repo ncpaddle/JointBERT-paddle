@@ -3,8 +3,6 @@ import copy
 import json
 import logging
 
-import torch
-# from torch.utils.data import TensorDataset
 import paddle
 from paddle.io import TensorDataset
 from utils import get_intent_labels, get_slot_labels
@@ -242,17 +240,12 @@ def load_and_cache_examples(args, tokenizer, mode):
         pad_token_label_id = args.ignore_index
         features = convert_examples_to_features(examples, args.max_seq_len, tokenizer,
                                                 pad_token_label_id=pad_token_label_id)
-        logger.info("Saving features into cached file %s", cached_features_file)
+        # logger.info("Saving features into cached file %s", cached_features_file)
         # torch.save(features, cached_features_file)
-        paddle.save(features,cached_features_file)
+        # paddle.save(features,cached_features_file)
 
 
     # # Convert to Tensors and build dataset
-    # all_input_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
-    # all_attention_mask = torch.tensor([f.attention_mask for f in features], dtype=torch.long)
-    # all_token_type_ids = torch.tensor([f.token_type_ids for f in features], dtype=torch.long)
-    # all_intent_label_ids = torch.tensor([f.intent_label_id for f in features], dtype=torch.long)
-    # all_slot_labels_ids = torch.tensor([f.slot_labels_ids for f in features], dtype=torch.long)
     all_input_ids = paddle.to_tensor([f.input_ids for f in features], dtype=paddle.int64)
     all_attention_mask = paddle.to_tensor([f.attention_mask for f in features], dtype=paddle.int64)
     all_token_type_ids = paddle.to_tensor([f.token_type_ids for f in features], dtype=paddle.int64)

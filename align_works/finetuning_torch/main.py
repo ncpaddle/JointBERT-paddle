@@ -23,12 +23,16 @@ def main(args):
         trainer.load_model()
         trainer.evaluate("test")
 
+    if args.do_align:
+        trainer.align()
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--task", default=None, required=True, type=str, help="The name of the task to train")
-    parser.add_argument("--model_dir", default='test_modelParams', required=True, type=str, help="Path to save, load model")
+    parser.add_argument("--task", default='atis', type=str, help="The name of the task to train")
+    parser.add_argument("--model_dir", default='snip_model', type=str, help="Path to save, load model")
+    parser.add_argument("--do_align", action="store_true")
     parser.add_argument("--data_dir", default="../../data", type=str, help="The input data dir")
     parser.add_argument("--intent_label_file", default="intent_label.txt", type=str, help="Intent Label file")
     parser.add_argument("--slot_label_file", default="slot_label.txt", type=str, help="Slot Label file")
@@ -65,7 +69,7 @@ if __name__ == '__main__':
     # CRF option
     parser.add_argument("--use_crf", action="store_true", help="Whether to use CRF")
     parser.add_argument("--slot_pad_label", default="PAD", type=str, help="Pad token for slot label pad (to be ignore when calculate loss)")
-    parser.add_argument("--model_name_or_path", default="", type=str, help="")
+    parser.add_argument("--model_name_or_path", default="../atis_params", type=str, help="")
     args = parser.parse_args()
 
     if args.model_name_or_path == "":

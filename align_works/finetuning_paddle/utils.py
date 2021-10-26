@@ -9,7 +9,7 @@ from metrics import precision_score, recall_score, f1_score
 # from transformers import BertConfig, DistilBertConfig, AlbertConfig
 from paddlenlp.transformers import BertTokenizer
 
-from model import JointBERT
+from model.modeling_jointbert import JointBERT
 
 MODEL_CLASSES = {
     'bert': (JointBERT, BertTokenizer),

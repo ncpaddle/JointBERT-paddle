@@ -1,0 +1,101 @@
+[2021/10/26 17:39:44] root INFO: test_0_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_0_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_0_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_0_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_0_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_1_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_1_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_1_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_1_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_1_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_2_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_2_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_2_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_2_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_2_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_3_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_3_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_3_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_3_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_3_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_4_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_4_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_4_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_4_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: test_4_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_0_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_0_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_0_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_0_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_0_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_1_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_1_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_1_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_1_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_1_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_2_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_2_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_2_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_2_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_2_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_3_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_3_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_3_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_3_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_3_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_4_input_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_4_attention_mask: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_4_intent_label_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_4_slot_labels_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: dev_4_token_type_ids: 
+[2021/10/26 17:39:44] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 17:39:44] root INFO: diff check passed

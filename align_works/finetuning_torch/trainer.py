@@ -3,10 +3,11 @@ import logging
 from tqdm import tqdm, trange
 
 import numpy as np
+import torch
+from transformers import get_linear_schedule_with_warmup, AdamW
 import paddle
-from paddle.io import DataLoader, RandomSampler, SequenceSampler
-from paddle.optimizer import AdamW
-from paddlenlp.transformers import LinearDecayWithWarmup
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
+
 
 
 from utils import MODEL_CLASSES, compute_metrics, get_intent_labels, get_slot_labels
@@ -35,8 +36,8 @@ class Trainer(object):
                                                       slot_label_lst=self.slot_label_lst)
 
         # GPU or CPU
-        # self.device = "cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu"
-        # self.model.to(self.device)
+        self.device = "cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu"
+        self.model.to(self.device)
 
     def train(self):
         train_sampler = RandomSampler(self.train_dataset)
@@ -79,7 +80,6 @@ class Trainer(object):
             for step, batch in enumerate(epoch_iterator):
                 self.model.train()
                 batch = tuple(t.to(self.device) for t in batch)  # GPU or CPU
-
                 inputs = {'input_ids': batch[0],
                           'attention_mask': batch[1],
                           'intent_label_ids': batch[3],
@@ -239,3 +239,48 @@ class Trainer(object):
             logger.info("***** Model Loaded *****")
         except:
             raise Exception("Some model files might be missing...")
+
+    def align(self):
+        from reprod_log import ReprodLogger, ReprodDiffHelper
+        self.model = self.model_class.from_pretrained(self.args.model_name_or_path,
+                                                      args=self.args,
+                                                      intent_label_lst=self.intent_label_lst,
+                                                      slot_label_lst=self.slot_label_lst)
+
+        test_sampler = SequentialSampler(self.test_dataset)
+        dev_sampler = SequentialSampler(self.dev_dataset)
+        test_dataloader = DataLoader(self.test_dataset, sampler=test_sampler, batch_size=self.args.eval_batch_size)
+        dev_dataloader = DataLoader(self.dev_dataset, sampler=dev_sampler, batch_size=self.args.eval_batch_size)
+
+        rl_paddle = ReprodLogger()
+        i = 0
+        for batch in test_dataloader:
+            batch = tuple(t.to(self.device) for t in batch)
+            # input_ids (32, 50)
+            # attention_mask (32, 50)
+            # intent_label_ids (32, 1)
+            # slot_labels_ids (32, 50)
+            # token_type_ids (32, 50)
+            rl_paddle.add('test_{}_input_ids'.format(i), batch[0].numpy())
+            rl_paddle.add('test_{}_attention_mask'.format(i), batch[1].numpy())
+            rl_paddle.add('test_{}_intent_label_ids'.format(i), batch[3].numpy())
+            rl_paddle.add('test_{}_slot_labels_ids'.format(i), batch[4].numpy())
+            rl_paddle.add('test_{}_token_type_ids'.format(i), batch[2].numpy())
+            i += 1
+            if i >= 5:
+                break
+
+        j = 0
+        for batch in dev_dataloader:
+            batch = tuple(t.to(self.device) for t in batch)
+            rl_paddle.add('dev_{}_input_ids'.format(j), batch[0].numpy())
+            rl_paddle.add('dev_{}_attention_mask'.format(j), batch[1].numpy())
+            rl_paddle.add('dev_{}_intent_label_ids'.format(j), batch[3].numpy())
+            rl_paddle.add('dev_{}_slot_labels_ids'.format(j), batch[4].numpy())
+            rl_paddle.add('dev_{}_token_type_ids'.format(j), batch[2].numpy())
+            j += 1
+            if j >= 5:
+                break
+
+        rl_paddle.save('../test_dev_outputData_torch.npy')
+        print('get .npy file!')
