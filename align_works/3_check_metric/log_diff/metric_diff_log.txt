@@ -1,0 +1,13 @@
+[2021/10/26 20:40:15] root INFO: loss: 
+[2021/10/26 20:40:15] root INFO: 	mean diff: check passed: True, value: 7.737960132647714e-07
+[2021/10/26 20:40:15] root INFO: intent_acc: 
+[2021/10/26 20:40:15] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 20:40:15] root INFO: slot_precision: 
+[2021/10/26 20:40:15] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 20:40:15] root INFO: slot_recall: 
+[2021/10/26 20:40:15] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 20:40:15] root INFO: slot_f1: 
+[2021/10/26 20:40:15] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 20:40:15] root INFO: sementic_frame_acc: 
+[2021/10/26 20:40:15] root INFO: 	mean diff: check passed: True, value: 0.0
+[2021/10/26 20:40:15] root INFO: diff check passed

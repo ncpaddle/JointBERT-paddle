@@ -3,7 +3,7 @@ paddlepaddle复现JointBERT
 
 
 
-- 预训练模型已对齐
+- 在做最后一步对齐
 
 
 

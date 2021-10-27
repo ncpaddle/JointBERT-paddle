@@ -84,7 +84,6 @@ class Trainer(object):
             epoch_iterator = tqdm(train_dataloader, desc="Iteration")
             for step, batch in enumerate(epoch_iterator):
                 self.model.train()
-                batch = tuple(t for t in batch)
                 batch[3] = paddle.squeeze(batch[3], -1)
                 batch[4] = paddle.squeeze(batch[4], -1)
                 inputs = {'input_ids': batch[0],

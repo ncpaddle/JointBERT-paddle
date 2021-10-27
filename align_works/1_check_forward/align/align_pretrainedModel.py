@@ -1,4 +1,3 @@
-
 import argparse
 import random
 from reprod_log import ReprodLogger, ReprodDiffHelper
@@ -69,13 +68,6 @@ args = getArgs()
 
 # 输入fake_data，得到预测时的数据    在pytorch源代码中生成
 inputs = pickle.load(open('../../fake_data.bin', 'rb'))
-# for k, v in inputs.items():
-#     print(k, v.shape)
-# input_ids (32, 50)
-# attention_mask (32, 50)
-# intent_label_ids (32, 1)
-# slot_labels_ids (32, 50)
-# token_type_ids (32, 50)
 
 # 生成paddle和torch的输入
 paddle_inputs = {k: paddle.to_tensor(v) for (k, v) in inputs.items()}
