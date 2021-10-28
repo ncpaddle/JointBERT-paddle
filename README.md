@@ -33,6 +33,8 @@
 
 ## Training & Evaluation
 
+
+
 ```bash
 # Train
 $ python main.py --task {task_name} \
@@ -82,13 +84,9 @@ $ python main.py --task snips \
                 
 ```
 
-## 
+
 
 ## Results
-
-- Run 5 ~ 10 epochs (Record the best result)
-- Only test with `uncased` model
-- ALBERT xxlarge sometimes can't converge well for slot prediction.
 
 |           |                      | Intent acc (%) | Slot F1 (%) | Sentence acc (%) |
 | --------- | -------------------- | -------------- | ----------- | ---------------- |
@@ -97,7 +95,7 @@ $ python main.py --task snips \
 |           | BERT (paddle)        | 98.6           | 96.1        | 91.4             |
 |           |                      |                |             |                  |
 |           | BERT + CRF (paper)   | 98.4           | 96.7        | 92.6             |
-|           | BERT + CRF (pytorch) |                |             |                  |
+|           | BERT + CRF (pytorch) | 98.6           | 96.8        | 93.1             |
 |           | BERT + CRF (paddle)  | 98.5           | 96.8        | 92.7             |
 |           |                      |                |             |                  |
 | **ATIS**  | BERT (paper)         | 97.5           | 96.1        | 88.2             |
@@ -110,22 +108,9 @@ $ python main.py --task snips \
 
 ## Align
 
-- `forward_diff`: 
-- `metric_diff`:
-- `loss_diff`:
-- `backward_diff`:
-- `train_align`:
+- `forward_diff`: [model_diff.txt](https://github.com/ncpaddle/JointBERT-paddle/blob/main/align_works/1_check_forward/log_diff/model_diff.txt)
+- `metric_diff` and `loss_diff`: [metric_loss_diff.txt](https://github.com/ncpaddle/JointBERT-paddle/blob/main/align_works/3_4_check_metric_loss/log_diff/metric_diff_log.txt)
+- `backward_diff`: [backward_loss_diff.txt](https://github.com/ncpaddle/JointBERT-paddle/blob/main/align_works/5-7-8_check_optim-norm-backward/log_diff/loss_diff.txt)
+- `train_align`: experiment results
 
-More details about align works in here.
-
-
-
-
-
-
-
-
-
-
-
-第五十篇RemBERT，没有代码，只有模型，怎么做对齐
+More details about align works in [here](https://github.com/ncpaddle/JointBERT-paddle/tree/main/align_works).
