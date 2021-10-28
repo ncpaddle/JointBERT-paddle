@@ -1,2 +1,3 @@
 align_works/atis_params/model_state.pdparams
 align_works/atis_params/pytorch_model.bin
+trained_models

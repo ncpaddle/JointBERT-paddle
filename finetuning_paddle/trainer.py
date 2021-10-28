@@ -28,9 +28,12 @@ class Trainer(object):
 
         self.model_class, _ = MODEL_CLASSES[args.model_type]
         self.model = self.model_class.from_pretrained(args.model_name_or_path,
-                                                      args=args,
+                                                      slot_label_lst=self.slot_label_lst,
                                                       intent_label_lst=self.intent_label_lst,
-                                                      slot_label_lst=self.slot_label_lst)
+                                                      use_crf=args.use_crf,
+                                                      dropout_rate=args.dropout_rate,                        
+                                                      ignore_index=args.ignore_index,
+                                                      slot_loss_coef=args.slot_loss_coef)
 
     def train(self):
 
@@ -212,12 +215,6 @@ class Trainer(object):
         logger.info("***** Eval results *****")
         for key in sorted(results.keys()):
             logger.info("  %s = %s", key, str(results[key]))
-
-        from reprod_log import ReprodLogger, ReprodDiffHelper
-        rl_paddle = ReprodLogger()
-        for key, value in results.items():
-            rl_paddle.add(key, np.array(value))
-        rl_paddle.save('metric_paddle.npy')
 
         return results
 

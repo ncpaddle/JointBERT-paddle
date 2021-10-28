@@ -65,7 +65,7 @@ if __name__ == '__main__':
     # CRF option
     parser.add_argument("--use_crf", action="store_true", help="Whether to use CRF")
     parser.add_argument("--slot_pad_label", default="PAD", type=str, help="Pad token for slot label pad (to be ignore when calculate loss)")
-    parser.add_argument("--model_name_or_path", default="", type=str, help="")
+    parser.add_argument("--model_name_or_path", default="bert-base-uncased", type=str, help="")
     args = parser.parse_args()
 
     if args.model_name_or_path == "":
