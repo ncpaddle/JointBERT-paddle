@@ -33,7 +33,11 @@
 
 ## Training & Evaluation
 
+### Style one
 
+- **Gitting clone the repo and using the following scripts**:
+
+If you want to evaluate our models directly, you can download our trained model parameters from [here](https://drive.google.com/drive/folders/1hM67xsLNtQSWTdGfw6WvAiL9YC4fo7hW?usp=sharing), and change `--model_name_or_path` in evaluating scripts. 
 
 ```bash
 # Train
@@ -81,8 +85,19 @@ $ python main.py --task snips \
                 --model_name_or_path bert-base-uncased \
                 --num_train_epochs 30.0
                 
+# Example for evaluation
+$ python main.py --task snips \
+                --model_type bert \
+                --model_dir snips_model \
+                --do_eval \
+                --data_dir ../data \
+                --model_name_or_path trained_models/snips_model_nocrf \
+                --num_train_epochs 30.0
+                
                 
 ```
+
+- Using BaiDu AI Studio and run our program in [here]. 
 
 
 
@@ -99,7 +114,7 @@ $ python main.py --task snips \
 |           | BERT + CRF (paddle)  | 98.5           | 96.8        | 92.7             |
 |           |                      |                |             |                  |
 | **ATIS**  | BERT (paper)         | 97.5           | 96.1        | 88.2             |
-|           | BERT (pytorch)       |                |             |                  |
+|           | BERT (pytorch)       | 97.5           | 95.9        | 88.2             |
 |           | BERT (paddle)        | 97.5           | 95.6        | 87.6             |
 |           |                      |                |             |                  |
 |           | BERT + CRF (paper)   | 97.9           | 96.0        | 88.6             |
