@@ -37,7 +37,7 @@
 
 - **Gitting clone the repo and using the following scripts**:
 
-If you want to evaluate our models directly, you can download our trained model parameters from [here](https://drive.google.com/drive/folders/1hM67xsLNtQSWTdGfw6WvAiL9YC4fo7hW?usp=sharing), and change `--model_name_or_path` in evaluating scripts. 
+If you want to evaluate our models directly, you can download our trained model parameters from [Google Cloud](https://drive.google.com/drive/folders/1hM67xsLNtQSWTdGfw6WvAiL9YC4fo7hW?usp=sharing), and change `--model_name_or_path` in evaluating scripts. 
 
 ```bash
 # Train
@@ -45,7 +45,8 @@ $ python main.py --task {task_name} \
                   --model_type {model_type} \
                   --model_dir {model_dir_name} \
                   --do_train --do_eval \
-                  --use_crf
+                  --use_crf \
+                  --model_name_or_path {model_name in the training stage}
 
 # Train For ATIS
 $ python main.py --task atis \
@@ -88,16 +89,17 @@ $ python main.py --task snips \
 # Example for evaluation
 $ python main.py --task snips \
                 --model_type bert \
-                --model_dir snips_model \
+                --model_dir trained_models/snips_model_nocrf \
                 --do_eval \
                 --data_dir ../data \
-                --model_name_or_path trained_models/snips_model_nocrf \
-                --num_train_epochs 30.0
+                --model_name_or_path  bert-base-uncased \
                 
                 
 ```
 
-- Using BaiDu AI Studio and run our program in [here]. 
+### Style two
+
+- Using BaiDu AI Studio and choosing `JoingBERT-paddle` edition to run our program in [here](https://aistudio.baidu.com/aistudio/projectdetail/2532066?shared=1). 
 
 
 
