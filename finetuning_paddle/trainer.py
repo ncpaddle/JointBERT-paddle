@@ -8,6 +8,7 @@ from paddle.io import DataLoader, RandomSampler, SequenceSampler, BatchSampler
 from paddle.optimizer import AdamW
 from paddlenlp.transformers import LinearDecayWithWarmup
 
+from paddlenlp.transformers import BertTokenizer
 
 from utils import MODEL_CLASSES, compute_metrics, get_intent_labels, get_slot_labels
 
